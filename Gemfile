@@ -8,6 +8,9 @@ ruby '2.7.2'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
+gem 'simple_command'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 
 group :development, :test do

@@ -4,14 +4,16 @@
 #
 # Table name: accounts
 #
-#  id           :bigint           not null, primary key
-#  email        :string
-#  first_name   :string
-#  last_name    :string
-#  phone_number :string
-#  status       :integer          default(0), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id              :bigint           not null, primary key
+#  balance         :float            default(0.0)
+#  email           :string
+#  first_name      :string
+#  last_name       :string
+#  password_digest :string
+#  phone_number    :string
+#  status          :integer          default("pending"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -23,6 +25,7 @@ FactoryBot.define do
   factory :account do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
+    password { Faker::Internet.password }
     email { Faker::Internet.email }
     phone_number { Faker::PhoneNumber.cell_phone_in_e164 }
 

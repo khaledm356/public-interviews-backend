@@ -4,14 +4,16 @@
 #
 # Table name: accounts
 #
-#  id           :bigint           not null, primary key
-#  email        :string
-#  first_name   :string
-#  last_name    :string
-#  phone_number :string
-#  status       :integer          default(0), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id              :bigint           not null, primary key
+#  balance         :float            default(0.0)
+#  email           :string
+#  first_name      :string
+#  last_name       :string
+#  password_digest :string
+#  phone_number    :string
+#  status          :integer          default("pending"), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -21,7 +23,19 @@
 #
 class Account < ApplicationRecord
   validates :first_name, :last_name, :email, :phone_number, presence: true
+  validates :balance, :numericality => { :greater_than_or_equal_to => 0}
+  has_secure_password
 
+  def add_balance(amount)
+    self.balance =  self.balance.to_f + amount
+    save
+  end
+
+  def substract_balance(amount)
+    self.balance =  self.balance.to_f - amount
+    save
+  end
+  
   enum status: {
     unverified: -1,
     pending: 0,
